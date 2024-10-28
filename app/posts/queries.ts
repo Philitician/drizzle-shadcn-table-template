@@ -1,7 +1,8 @@
 "server-only";
 
 import { format } from "date-fns";
-import { and, asc, count, desc, eq, ilike, or, SQL } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, or } from "drizzle-orm";
+import type { SQL } from "drizzle-orm";
 import { match } from "ts-pattern";
 import { db } from "~/db";
 import { authors } from "~/db/schemas/authors";
