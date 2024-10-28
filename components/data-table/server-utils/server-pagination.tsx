@@ -51,7 +51,7 @@ export function DataTableServerPagination({
         <Select
           value={limit.toString()}
           onValueChange={(value) => {
-            setLimit(Number(value));
+            void setLimit(Number(value));
           }}
         >
           <SelectTrigger className="h-8 w-[4.5rem]">
@@ -71,7 +71,7 @@ export function DataTableServerPagination({
         <Button
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
-          onClick={() => setPage(1)}
+          onClick={() => void setPage(1)}
           disabled={page === 1}
         >
           <span className="sr-only">Gå til første side</span>
@@ -80,7 +80,7 @@ export function DataTableServerPagination({
         <Button
           variant="outline"
           className="h-8 w-8 p-0"
-          onClick={() => setPage(page - 1)}
+          onClick={() => void setPage(page - 1)}
           disabled={page === 1}
         >
           <span className="sr-only">Gå til forrige side</span>
@@ -89,7 +89,7 @@ export function DataTableServerPagination({
         <Button
           variant="outline"
           className="h-8 w-8 p-0"
-          onClick={() => setPage(page + 1)}
+          onClick={() => void setPage(page + 1)}
           disabled={page === pageCount}
         >
           <span className="sr-only">Gå til neste side</span>
@@ -98,7 +98,7 @@ export function DataTableServerPagination({
         <Button
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
-          onClick={() => setPage(pageCount - 1)}
+          onClick={() => void setPage(pageCount - 1)}
           disabled={page === pageCount}
         >
           <span className="sr-only">Gå til siste side</span>
