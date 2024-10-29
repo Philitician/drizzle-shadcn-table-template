@@ -1,7 +1,8 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import type { Author } from "~/app/posts/_queries";
+import { AuthorInfo } from "~/app/posts/_queries";
+
 import { FormField } from "~/components/ui/form";
 import {
   Select,
@@ -13,7 +14,7 @@ import {
 import type { NewPost } from "~/db/schemas/posts/types";
 
 type AuthorSelectProps = {
-  authors: Author[];
+  authors: AuthorInfo[];
 };
 
 export function AuthorSelect({ authors }: AuthorSelectProps) {

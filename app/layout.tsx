@@ -33,6 +33,7 @@ function Navbar() {
         Home
       </Link>
       <Link href="/posts">Posts</Link>
+      <Link href="/authors">Authors</Link>
     </nav>
   );
 }

@@ -1,21 +1,32 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableServerColumnHeader } from "~/components/data-table/server-utils/server-column-header";
 import type { PostRow } from "../../queries";
+
+export const columnLabels = {
+  title: "Title",
+  status: "Status",
+  author: "Author",
+  createdAt: "Created",
+};
+
 export const columns: ColumnDef<PostRow>[] = [
   {
-    accessorKey: "id",
+    id: "id",
   },
   {
     accessorKey: "title",
     header: ({ column }) => (
-      <DataTableServerColumnHeader column={column} title="Title" />
+      <DataTableServerColumnHeader column={column} title={columnLabels.title} />
     ),
     enableSorting: true,
   },
   {
     accessorKey: "status",
     header: ({ column }) => (
-      <DataTableServerColumnHeader column={column} title="Status" />
+      <DataTableServerColumnHeader
+        column={column}
+        title={columnLabels.status}
+      />
     ),
     enableSorting: true,
   },
@@ -23,15 +34,26 @@ export const columns: ColumnDef<PostRow>[] = [
     id: "author.name",
     accessorKey: "author.name",
     header: ({ column }) => (
-      <DataTableServerColumnHeader column={column} title="Author" />
+      <DataTableServerColumnHeader
+        column={column}
+        title={columnLabels.author}
+      />
     ),
     enableSorting: true,
   },
   {
     accessorKey: "createdAt",
     header: ({ column }) => (
-      <DataTableServerColumnHeader column={column} title="Created" />
+      <DataTableServerColumnHeader
+        column={column}
+        title={columnLabels.createdAt}
+      />
     ),
     enableSorting: true,
   },
+  // {
+  //   id: "actions",
+  //   header: () => null,
+  //   cell: ({ row }) => <div>{row.original.id}</div>,
+  // },
 ];

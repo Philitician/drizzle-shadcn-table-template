@@ -12,11 +12,13 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
+    "tsc": "tsc --noEmit",
     "db:seed": "dotenv -- tsx db/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-select": "^2.1.2",

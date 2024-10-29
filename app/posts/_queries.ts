@@ -1,17 +1,10 @@
 "server-only";
 
-const AUTHORS = [
-  { id: 1, name: "John Doe" },
-  { id: 2, name: "Michael Scott" },
-  { id: 3, name: "Dwight Schrute" },
-  { id: 4, name: "Pam Beesly" },
-  { id: 5, name: "Jim Halpert" },
-];
+import { db } from "~/db";
+import { authors } from "~/db/schemas";
 
 export const getAuthors = async () => {
-  // delay 1 second
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return AUTHORS;
+  return db.select({ id: authors.id, name: authors.name }).from(authors);
 };
 
-export type Author = Awaited<ReturnType<typeof getAuthors>>[number];
+export type AuthorInfo = Awaited<ReturnType<typeof getAuthors>>[number];

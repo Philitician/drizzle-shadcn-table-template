@@ -25,7 +25,7 @@ export function CreatePostDialog({ children }: CreatePostDialogProps) {
       onOpenChange={(isOpen) => setIsModalOpen(isOpen)}
     >
       <DialogTrigger asChild>
-        <Button variant="outline" className="flex gap-2 text-sm">
+        <Button className="flex gap-2 text-sm">
           <Plus className="text-icon h-5 w-5" />
           Create post
         </Button>
