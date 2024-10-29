@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useMemo } from "react";
 import { cn } from "~/lib/utils";
 import { Button } from "./ui/button";
@@ -65,7 +65,7 @@ export function FancyFilter({
             <span className="truncate">
               {label} {selectedOptionsCount > 0 && `(${selectedOptionsCount})`}
             </span>
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronDown size={20} />
           </Button>
         </PopoverTrigger>
         <PopoverContent
