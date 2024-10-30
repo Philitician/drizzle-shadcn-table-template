@@ -25,7 +25,7 @@ export type Option = {
   label: string;
 };
 
-export type FancyFilterProps = {
+export type MultiBoxProps = {
   label: string;
   options: Option[];
   selectedOptions: string[];
@@ -33,13 +33,13 @@ export type FancyFilterProps = {
   clearSelectedOptions: () => void;
 };
 
-export function FancyFilter({
+export function MultiBox({
   label,
   options,
   selectedOptions,
   setSelectedOption,
   clearSelectedOptions,
-}: FancyFilterProps) {
+}: MultiBoxProps) {
   const selectedOptionsCount = selectedOptions?.length ?? 0;
 
   const optionsSortedBySelected = useMemo(

@@ -2,9 +2,9 @@
 
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useCallback } from "react";
-import { FancyFilter, type FancyFilterProps } from "~/components/fancy-filter";
+import { MultiBox, type MultiBoxProps } from "~/components/multi-box";
 
-export type ServerFilterProps = Pick<FancyFilterProps, "label" | "options"> & {
+export type ServerFilterProps = Pick<MultiBoxProps, "label" | "options"> & {
   filterKey: string;
 };
 
@@ -29,7 +29,7 @@ export function ServerFilter({ filterKey, label, options }: ServerFilterProps) {
   );
 
   return (
-    <FancyFilter
+    <MultiBox
       label={label}
       options={options}
       selectedOptions={selectedOptions}
