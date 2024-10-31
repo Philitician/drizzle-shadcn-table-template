@@ -53,10 +53,14 @@ export function DataTableServerSearch({
             variant="ghost"
             type="button"
             aria-label="Clear"
-            className="h-7 w-7 text-gray-600"
-            onClick={() => setQuery(null)}
+            onClick={() => {
+              void setQuery(null);
+              if (inputRef.current) {
+                inputRef.current.value = "";
+              }
+            }}
           >
-            <X size={18} className="text-muted-foreground" />
+            <X className="text-icon" />
           </Button>
         </div>
       )}

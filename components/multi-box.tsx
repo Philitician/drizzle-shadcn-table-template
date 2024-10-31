@@ -3,6 +3,7 @@
 import { Check, ChevronDown } from "lucide-react";
 import { useMemo } from "react";
 import { cn } from "~/lib/utils";
+import type { ButtonProps } from "./ui/button";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -25,7 +26,7 @@ export type Option = {
   label: string;
 };
 
-export type MultiBoxProps = {
+export type MultiBoxProps = Pick<ButtonProps, "size"> & {
   label: string;
   options: Option[];
   selectedOptions: string[];
@@ -39,8 +40,9 @@ export function MultiBox({
   selectedOptions,
   setSelectedOption,
   clearSelectedOptions,
+  size = "default",
 }: MultiBoxProps) {
-  const selectedOptionsCount = selectedOptions?.length ?? 0;
+  const selectedOptionsCount = selectedOptions.length;
 
   const optionsSortedBySelected = useMemo(
     () =>
@@ -52,6 +54,7 @@ export function MultiBox({
       }),
     [options, selectedOptions],
   );
+
   return (
     <div className="max-w-[350px]">
       <Popover>
@@ -59,7 +62,7 @@ export function MultiBox({
           <Button
             variant="outline"
             role="combobox"
-            size="sm"
+            size={size}
             className="w-[160px] justify-between bg-white text-sm font-medium text-slate-600"
           >
             <span className="truncate">
@@ -78,8 +81,6 @@ export function MultiBox({
               <CommandInput placeholder="Søk..." />
               <CommandGroup className="max-h-[145px] overflow-auto">
                 {optionsSortedBySelected.map(({ value, label }) => {
-                  console.log("value", value);
-                  console.log("label", label);
                   return (
                     <CommandItem
                       key={value}

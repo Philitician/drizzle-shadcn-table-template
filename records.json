@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": 1,
+    "productNumber": "6911680",
+    "productName": "STIKKLIST 19 7 UTTAK",
+    "category": {
+      "lvl0": "Skap",
+      "lvl1": "Skap > Deler",
+      "lvl2": "Skap > Deler > Reservedeler / tilbehør"
+    }
+  },
+  {
+    "objectID": 2,
+    "productNumber": "1501362",
+    "productName": "STIKK IF Dobbel M/J HVIT",
+    "category": {
+      "lvl0": "Stikkontakter",
+      "lvl1": "Stikkontakter > Innfelte stikkontakter",
+      "lvl2": "Stikkontakter > Innfelte stikkontakter > Innfelte stikkontakter doble"
+    }
+  }
+]

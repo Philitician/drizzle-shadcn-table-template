@@ -1,15 +1,12 @@
 "use client";
 
-import {
-  getCoreRowModel,
-  useReactTable,
-  VisibilityState,
-} from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import type { VisibilityState } from "@tanstack/react-table";
 import { use, useState } from "react";
-import { DataTableBase } from "~/components/data-table/client-utils/data-table-base";
+import { DataTableBase } from "~/components/data-table/base";
 import { DataTableServerPagination } from "~/components/data-table/server-utils/server-pagination";
-import { AuthorInfo } from "../../_queries";
-import type { PostsResult } from "../../queries";
+import type { AuthorInfo } from "../../_queries";
+import type { PostsResult } from "../../_queries";
 import { columns } from "./columns";
 import { PostsDataTableToolbar } from "./toolbar";
 

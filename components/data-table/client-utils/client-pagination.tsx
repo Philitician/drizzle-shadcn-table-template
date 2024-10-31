@@ -18,6 +18,7 @@ import { Button } from "~/components/ui/button";
 
 type DataTablePaginationProps<TData> = {
   table: Table<TData>;
+  pageSizeOptions?: number[];
 };
 
 /**
@@ -26,6 +27,7 @@ type DataTablePaginationProps<TData> = {
  */
 export function DataTableClientPagination<TData>({
   table,
+  pageSizeOptions = [10, 25, 50],
 }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between gap-6 px-6 lg:gap-8">
@@ -43,7 +45,7 @@ export function DataTableClientPagination<TData>({
             <SelectValue placeholder={table.getState().pagination.pageSize} />
           </SelectTrigger>
           <SelectContent side="top">
-            {[10, 25, 50].map((pageSize) => (
+            {pageSizeOptions.map((pageSize) => (
               <SelectItem key={pageSize} value={pageSize.toString()}>
                 {pageSize}
               </SelectItem>

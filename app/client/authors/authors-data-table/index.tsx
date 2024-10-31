@@ -1,10 +1,16 @@
 "use client";
 
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { DataTableBase } from "~/components/data-table/client-utils/data-table-base";
+import {
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from "@tanstack/react-table";
+
 import { columns } from "./columns";
-import type { AuthorRow } from "../queries";
-import { use } from "react";
+import type { AuthorRow } from "../_queries";
+import { use, useState } from "react";
+import { DataTableBase } from "~/components/data-table/base";
 
 type AuthorsDataTableProps = {
   dataPromise: Promise<AuthorRow[]>;
@@ -12,10 +18,16 @@ type AuthorsDataTableProps = {
 
 export function AuthorsDataTable({ dataPromise }: AuthorsDataTableProps) {
   const data = use(dataPromise);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
   });
   return (
     <DataTableBase

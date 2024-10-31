@@ -28,12 +28,20 @@ export default function RootLayout({
 
 function Navbar() {
   return (
-    <nav className="flex items-center gap-4 p-8">
+    <nav className="flex flex-col items-center gap-2 p-8">
       <Link href="/" className="text-lg font-semibold">
         Home
       </Link>
-      <Link href="/posts">Posts</Link>
-      <Link href="/authors">Authors</Link>
+      <div className="flex gap-4">
+        <h3 className="text-sm font-medium">Server-side</h3>
+        <Link href="/server/posts">Posts</Link>
+        <Link href="/server/authors">Authors</Link>
+      </div>
+      <div className="flex gap-4">
+        <h3 className="text-sm font-medium">Client-side</h3>
+        <Link href="/client/posts">Posts</Link>
+        <Link href="/client/authors">Authors</Link>
+      </div>
     </nav>
   );
 }

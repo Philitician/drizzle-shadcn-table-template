@@ -1,7 +1,18 @@
 "server-only";
 
-import { format } from "date-fns";
-import { and, asc, count, desc, eq, ilike, or } from "drizzle-orm";
+import { endOfDay, format } from "date-fns";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gte,
+  ilike,
+  inArray,
+  lte,
+  or,
+} from "drizzle-orm";
 import type { SQL } from "drizzle-orm";
 import { match } from "ts-pattern";
 import { db } from "~/db";
@@ -19,15 +30,27 @@ const getSortByColumn = (sortBy: string) => {
 };
 
 export const getPostRows = async () => {
-  const { page, limit, sortBy, order, query, status, authorId } =
-    postsSearchParamsCache.all();
+  const {
+    page,
+    limit,
+    sortBy,
+    order,
+    query,
+    status,
+    "author.id": authorId,
+    createdAtEndDate,
+    createdAtStartDate,
+  } = postsSearchParamsCache.all();
+  console.log(createdAtStartDate, createdAtEndDate);
   const where = [
     or(
       ilike(posts.title, `%${query}%`).if(query),
       ilike(authors.name, `%${query}%`).if(query),
     ),
-    eq(posts.status, status!).if(status),
-    eq(posts.authorId, authorId!).if(authorId),
+    inArray(posts.status, status!).if(status?.length),
+    inArray(posts.authorId, authorId!).if(authorId?.length),
+    gte(posts.createdAt, createdAtStartDate!).if(createdAtStartDate),
+    lte(posts.createdAt, endOfDay(createdAtEndDate!)).if(createdAtEndDate),
   ];
   const sortByColumn = getSortByColumn(sortBy);
   const orderBy = order === "asc" ? asc(sortByColumn) : desc(sortByColumn);
@@ -79,6 +102,7 @@ const getPostRowData = async ({
       createdAt: posts.createdAt,
       updatedAt: posts.updatedAt,
       author: {
+        id: authors.id,
         name: authors.name,
       },
     })
@@ -92,3 +116,9 @@ const getPostRowData = async ({
 
 export type PostsResult = Awaited<ReturnType<typeof getPostRows>>;
 export type PostRow = PostsResult["data"][number];
+
+export const getAuthors = async () => {
+  return db.select({ id: authors.id, name: authors.name }).from(authors);
+};
+
+export type AuthorInfo = Awaited<ReturnType<typeof getAuthors>>[number];

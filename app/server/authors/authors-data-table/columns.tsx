@@ -1,6 +1,6 @@
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableServerColumnHeader } from "~/components/data-table/server-utils/server-column-header";
-import type { AuthorRow } from "../queries";
+import type { AuthorRow } from "../_queries";
 
 export const columns: ColumnDef<AuthorRow>[] = [
   {

@@ -5,6 +5,7 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { cn } from "~/lib/utils";
 import { X, Search } from "lucide-react";
+import { useRef } from "react";
 
 type DataTableSearchProps<TData> = {
   table: Table<TData>;
@@ -25,36 +26,40 @@ export function DataTableClientSearch<TData>({
   placeholder,
   className,
 }: DataTableSearchProps<TData>) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const setFocusToInput = () => {
+    inputRef.current?.focus();
+  };
+
   return (
     <div className="relative">
+      <div
+        className="absolute inset-y-0 left-3 flex items-center"
+        onClick={setFocusToInput}
+      >
+        <Search size={20} className="text-muted-foreground" />
+      </div>
       <Input
-        placeholder={placeholder}
+        ref={inputRef}
+        placeholder={placeholder ?? "Søk..."}
         value={globalFilter}
-        /* Ensure useState is properly set in DataTable to enable changing state; 
-        see filterting: https://ui.shadcn.com/docs/components/data-table */
-        onChange={(event) => table.setGlobalFilter(String(event.target.value))}
-        className={cn(
-          "border-lg h-10 w-full border-border text-sm shadow-sm md:w-[26.25rem]",
-          className,
-        )}
+        onChange={(e) => table.setGlobalFilter(e.target.value)}
+        className={cn("pl-10", className)}
       />
       {Boolean(globalFilter) && (
-        <div className="absolute inset-y-0 right-10">
+        <div className="absolute inset-y-0 right-3 flex items-center">
           <Button
             size="icon"
             variant="ghost"
             type="button"
             aria-label="Clear"
-            className="text-gray-600"
             onClick={() => table.setGlobalFilter("")}
           >
-            <X className="h-5 w-5" />
+            <X className="text-icon" />
           </Button>
         </div>
       )}
-      <div className="absolute inset-y-0 right-4 flex items-center">
-        <Search className="text-icon-muted h-5 w-5" />
-      </div>
     </div>
   );
 }

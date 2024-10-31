@@ -1,5 +1,5 @@
 import { PostsDataTable } from "./components/posts-data-table";
-import { getPostRows } from "./queries";
+import { getPostRows } from "./_queries";
 import type { SearchParams } from "nuqs/server";
 import { postsSearchParamsCache } from "./search-params";
 
@@ -22,7 +22,9 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
     <div className="space-y-4 px-12 pb-12">
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="py-8 text-3xl font-semibold">Manage posts</h1>
+          <h1 className="py-8 text-3xl font-semibold">
+            Manage posts (server-side)
+          </h1>
           <CreatePostDialog>
             <Suspense>
               <AuthorSelect authors={authors} />
@@ -34,9 +36,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         </div>
         <div className="absolute left-0 w-full border-b border-border" />
       </div>
-      <div className="flex flex-col gap-1">
-        <PostsDataTable dataPromise={getPostRows()} authors={authors} />
-      </div>
+      <PostsDataTable dataPromise={getPostRows()} authors={authors} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableServerColumnHeader } from "~/components/data-table/server-utils/server-column-header";
-import type { PostRow } from "../../queries";
+import type { PostRow } from "../../_queries";
 
 export const columnLabels = {
   title: "Title",
   status: "Status",
-  author: "Author",
+  "author.name": "Author",
   createdAt: "Created",
 };
 
@@ -31,12 +31,15 @@ export const columns: ColumnDef<PostRow>[] = [
     enableSorting: true,
   },
   {
+    id: "author.id",
+  },
+  {
     id: "author.name",
     accessorKey: "author.name",
     header: ({ column }) => (
       <DataTableServerColumnHeader
         column={column}
-        title={columnLabels.author}
+        title={columnLabels["author.name"]}
       />
     ),
     enableSorting: true,

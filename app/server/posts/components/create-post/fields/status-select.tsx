@@ -1,8 +1,6 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import { AuthorInfo } from "~/app/posts/_queries";
-
 import { FormField } from "~/components/ui/form";
 import {
   Select,
@@ -11,27 +9,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { POST_STATUSES } from "~/db/schemas/posts/constants";
 import type { NewPost } from "~/db/schemas/posts/types";
 
-type AuthorSelectProps = {
-  authors: AuthorInfo[];
-};
-
-export function AuthorSelect({ authors }: AuthorSelectProps) {
+export function StatusSelect() {
   const form = useFormContext<NewPost>();
   return (
     <FormField
       control={form.control}
-      name="authorId"
+      name="status"
       render={({ field }) => (
-        <Select onValueChange={field.onChange} value={field.value.toString()}>
+        <Select onValueChange={field.onChange} value={field.value}>
           <SelectTrigger>
-            <SelectValue placeholder="Select an author" />
+            <SelectValue placeholder="Select a status" />
           </SelectTrigger>
           <SelectContent>
-            {authors.map((author) => (
-              <SelectItem key={author.id} value={author.id.toString()}>
-                {author.name}
+            {POST_STATUSES.map((status) => (
+              <SelectItem key={status} value={status}>
+                {status}
               </SelectItem>
             ))}
           </SelectContent>
